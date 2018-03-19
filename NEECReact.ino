@@ -1,9 +1,9 @@
 /*----------------------
-Workshop Arduino NEEC 2018
+Workshop Arduino NEEC 2016
 Jogo React
 -----------------------/*
 
-/*variáveis para botões*/
+/*variáveis para butões*/
 int button_p1 = 13;
 int button_p2 = 2;
 
@@ -79,17 +79,17 @@ void Game_init() {
 
     // Piscar os leds (acender e apagar)
     // Apagar primeiro para ficarem as vidas "prontas"
-
-
-
-
-
-
-
-
-
-
-  
+    for(int i = 0; i < 3; i++) {
+      digitalWrite(led_p1[i], LOW);
+      digitalWrite(led_p2[i], LOW);
+      delay(delay_flash_init);
+    }
+    
+    for(int i = 0; i < 3; i++) {
+      digitalWrite(led_p1[i], HIGH);
+      digitalWrite(led_p2[i], HIGH);
+      delay(delay_flash_init);
+    }
   }
 }
 
@@ -101,15 +101,15 @@ int MainGame() {
   
   while(life_p1 != 0 && life_p2 != 0) {
      
-
-
-
-
-
-
-
-
-   
+    w_max = random(3, 10);
+    
+    for(int w = 0; w < w_max; w++) {
+      rand_led = random(RGB_green, RGB_red + 1);
+      digitalWrite(rand_led, HIGH);
+      delay(50);
+      digitalWrite(rand_led, LOW);
+      delay(50);
+    }
     
     rand_led = random(RGB_green, RGB_red + 1);
     digitalWrite(rand_led, HIGH);
@@ -126,8 +126,8 @@ int MainGame() {
 
     else if(winner == 2) {
       /* jogador 2 ganhou; jogador 1 perde 1 vida */
-      
-
+      digitalWrite(led_p1[j], LOW);
+      j--;
     }
     
     else if(winner == 3) {
@@ -141,9 +141,8 @@ int MainGame() {
     else if(winner == 4) {
       /* jogador 2 ganha 1 vida */
       if(i < 2) {
-        
-
-
+        i++;
+        digitalWrite(led_p2[i], HIGH);
       }
     }
 
@@ -191,26 +190,26 @@ int Round_Judge(int rand_led) {
 
     else if(buttonState_p2 == HIGH) {
       
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      if(rand_led == RGB_green) {
+        life_p1--;
+        winner = 2;
+        over++;
+      }
+      else if(rand_led == RGB_red) {
+        life_p2--;
+        winner = 1;
+        over++;
+      }
+      else if(rand_led == RGB_blue) {
+        if(life_p2 < 3)
+          life_p2++;
+        winner = 4;
+        over++;
+      }
     }
 
     else
-     
+      no_press++;
 
     
     if(no_press == no_press_limit) {
