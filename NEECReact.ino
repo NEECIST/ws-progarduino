@@ -1,9 +1,9 @@
 /*----------------------
-Workshop Arduino NEEC 2016
+Workshop Arduino NEEC 2018
 Jogo React
 -----------------------/*
 
-/*variáveis para butões*/
+/*variáveis para botões*/
 int button_p1 = 13;
 int button_p2 = 2;
 
