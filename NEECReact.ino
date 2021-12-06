@@ -1,5 +1,5 @@
 /*----------------------
-Workshop Arduino NEEC 2016
+Workshop Arduino NEEC 2021
 Jogo React
 -----------------------/*
 
