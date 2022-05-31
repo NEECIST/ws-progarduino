@@ -120,29 +120,29 @@ int MainGame() {
     
     if(winner == 1) {
       /* jogador 1 ganhou; jogador 2 perde 1 vida */
-      digitalWrite(led_p2[i], LOW);
-      i--;
+      digitalWrite(led_p2[life_p2-1], LOW);
+      life_p2--;
     }
 
     else if(winner == 2) {
       /* jogador 2 ganhou; jogador 1 perde 1 vida */
-      digitalWrite(led_p1[j], LOW);
-      j--;
+      digitalWrite(led_p1[life_p1-1], LOW);
+      life_p1--;
     }
     
     else if(winner == 3) {
       /* jogador 1 ganha 1 vida */
-      if(j < 2) {
-        j++;
-        digitalWrite(led_p1[j], HIGH);
+      if(life_p1 < 3) {
+        digitalWrite(led_p1[life_p1], HIGH);
+        life_p1++;
       }
     }
     
     else if(winner == 4) {
       /* jogador 2 ganha 1 vida */
-      if(i < 2) {
-        i++;
-        digitalWrite(led_p2[i], HIGH);
+      if(life_p2 < 3) {
+        digitalWrite(led_p2[life_p2], HIGH);
+        life_p2++;
       }
     }
 
@@ -171,18 +171,14 @@ int Round_Judge(int rand_led) {
     if(buttonState_p1 == HIGH) {
       
       if(rand_led == RGB_green) {
-        life_p2--;
         winner = 1;
         over++;
       }
       else if(rand_led == RGB_red) {
-        life_p1--;
         winner = 2;
         over++;
       }
       else if(rand_led == RGB_blue) {
-       if(life_p1 < 3)
-         life_p1++;
        winner = 3;
        over++;
       }
@@ -191,18 +187,14 @@ int Round_Judge(int rand_led) {
     else if(buttonState_p2 == HIGH) {
       
       if(rand_led == RGB_green) {
-        life_p1--;
         winner = 2;
         over++;
       }
       else if(rand_led == RGB_red) {
-        life_p2--;
         winner = 1;
         over++;
       }
       else if(rand_led == RGB_blue) {
-        if(life_p2 < 3)
-          life_p2++;
         winner = 4;
         over++;
       }
@@ -254,5 +246,3 @@ void EndGame(int winner) {
     }
   }
 }
-
-
