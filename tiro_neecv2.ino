@@ -54,7 +54,7 @@ void loop()
   if(millis() - start_time >= DURATION * 1000)
   {
     /* turn on and off 3 times */
-    for (j = 0; j < 3; ++j)
+    for (j = 0; j < 3; j++)
     {
       for(i=0;i<TARGETNUM;i++)
         digitalWrite(i+2 , HIGH);
@@ -85,7 +85,7 @@ void loop()
   for (i = 0; i < TARGETNUM; i++)
   {
     /*NOTE: while analogRead(A0) is more correct, analogRead(0) translates to read from A0 */
-    Serial.println(lux[i]); /* adjust sensors */
+    //Serial.println(lux[i]); /* adjust sensors */
     lux[i] = analogRead(i);
   }
 
